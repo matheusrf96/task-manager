@@ -33,7 +33,7 @@ const Form = () => (
             </div>
         </div>
 
-        <Button/>
+        <Button text="Adicionar" />
     </form>
 );
 
