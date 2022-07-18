@@ -1,9 +1,10 @@
 import React from "react";
+import { ITask } from "../../../types/tasks";
 
 import style from '../List.module.scss'
 
-const Item = (props: { task: string, time: string }) => {
-    const {task, time} = props
+const Item = ({id, task, time, selected, completed}: ITask) => {
+    console.log({id, task, time, selected, completed})
 
     return (
         <li className={style.item}>
