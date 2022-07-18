@@ -1,26 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Item from "./Item";
+import { ITask } from "../../types/tasks";
 
 import style from './List.module.scss'
 
-function List() {
-    const [tasks, setTasks] = useState([{
-        task: 'React',
-        time: '02:00:00',
-    }, {
-        task: 'JS',
-        time: '01:30:00',
-    }, {
-        task: 'TypeScript',
-        time: '03:00:00',
-    }])
+function List(props: {tasks: ITask[]}) {
+    const tasks = props.tasks
 
     return (
         <aside className={style.listaTarefas}>
-            <h2
-                onClick={() => setTasks([...tasks, { task: 'Kubernetes', time: '05:00:00' }])}
-            >
+            <h2>
                 Today tasks:
             </h2>
             <ul>
