@@ -10,7 +10,7 @@ interface Props extends ITask {
 const Item = ({id, task, time, selected, completed, selectTask}: Props) => {
     return (
         <li
-            className={style.item}
+            className={`${style.item} ${selected ? style.itemSelecionado : ''}`}
             onClick={() => selectTask({
                 id,
                 task,
