@@ -3,11 +3,22 @@ import { ITask } from "../../../types/tasks";
 
 import style from '../List.module.scss'
 
-const Item = ({id, task, time, selected, completed}: ITask) => {
-    console.log({id, task, time, selected, completed})
+interface Props extends ITask {
+    selectTask: (seletedTask: ITask) => void,
+}
 
+const Item = ({id, task, time, selected, completed, selectTask}: Props) => {
     return (
-        <li className={style.item}>
+        <li
+            className={style.item}
+            onClick={() => selectTask({
+                id,
+                task,
+                time,
+                selected,
+                completed,
+            })}
+        >
             <h3>{ task }</h3>
             <span>{ time }</span>
         </li>

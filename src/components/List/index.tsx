@@ -5,9 +5,12 @@ import { ITask } from "../../types/tasks";
 
 import style from './List.module.scss'
 
-function List(props: {tasks: ITask[]}) {
-    const tasks = props.tasks
+interface Props {
+    tasks: ITask[],
+    selectTask: (selectedTask: ITask) => void,
+}
 
+function List({ tasks, selectTask }: Props) {
     return (
         <aside className={style.listaTarefas}>
             <h2>
@@ -15,7 +18,11 @@ function List(props: {tasks: ITask[]}) {
             </h2>
             <ul>
                 { tasks.map((task, index) => (
-                    <Item key={index} {...task} />
+                    <Item
+                        selectTask={selectTask}
+                        key={index}
+                        {...task}
+                    />
                 ))}
             </ul>
         </aside>
