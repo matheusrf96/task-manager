@@ -9,9 +9,10 @@ import style from './Timer.module.scss'
 
 interface Props {
     selected: ITask | undefined,
+    finishTask: () => void,
 }
 
-const Timer = ({ selected }: Props) => {
+const Timer = ({ selected, finishTask }: Props) => {
     const [time, setTime] = useState<number>()
 
     useEffect(() => {
@@ -26,6 +27,8 @@ const Timer = ({ selected }: Props) => {
                 setTime(counter - 1)
                 return regressiveCount(counter - 1)
             }
+
+            finishTask()
         }, 1000)
     }
 
