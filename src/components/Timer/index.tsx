@@ -20,6 +20,15 @@ const Timer = ({ selected }: Props) => {
         }
     }, [selected])
 
+    function regressiveCount(counter: number = 0) {
+        setTimeout(() => {
+            if (counter > 0) {
+                setTime(counter - 1)
+                return regressiveCount(counter - 1)
+            }
+        }, 1000)
+    }
+
     return (
         <div className={style.cronometro}>
             <p className={style.titulo}>Choose a card and start the timer</p>
@@ -28,7 +37,7 @@ const Timer = ({ selected }: Props) => {
                 <Clock time={time} />
             </div>
 
-            <Button text="Start" />
+            <Button text="Start" onClick={() => regressiveCount(time)} />
         </div>
     )
 }

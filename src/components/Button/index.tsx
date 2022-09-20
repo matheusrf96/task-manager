@@ -2,13 +2,20 @@ import React from "react";
 
 import style from './Button.module.scss'
 
-const Button = (props: {
+interface Props {
     text: string,
     type?: "button" | "submit" | "reset" | undefined,
-}) => (
-    <button className={style.btn} type={ props.type }>
-        { props.text }
-    </button>
-)
+    onClick?: () => void
+}
+
+const Button = (props: Props) => {
+    const { type = "button", onClick } = props
+
+    return (
+        <button className={style.btn} type={ type } onClick={ onClick }>
+            { props.text }
+        </button>
+    )
+}
 
 export default Button;
