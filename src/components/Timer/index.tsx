@@ -23,10 +23,9 @@ const Timer = ({ selected }: Props) => {
     return (
         <div className={style.cronometro}>
             <p className={style.titulo}>Choose a card and start the timer</p>
-            { time }
 
             <div className={style.relogioWrapper}>
-                <Clock />
+                <Clock time={time} />
             </div>
 
             <Button text="Start" />
