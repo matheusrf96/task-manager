@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Button from "../Button";
 import { ITask } from "../../types/tasks";
@@ -6,70 +6,68 @@ import { ITask } from "../../types/tasks";
 import style from './Form.module.scss'
 import { v4 as uuidv4 } from 'uuid';
 
-class Form extends React.Component<{
+interface Props {
     setTasks: React.Dispatch<React.SetStateAction<ITask[]>>
-}> {
-    defaultState = {
-        task: '',
-        time: '00:00:00'
-    }
+}
 
-    state = this.defaultState
+function Form({ setTasks }: Props) {
+    const [task, setTask] = useState("")
+    const [time, setTime] = useState("00:00")
 
-    saveTask(e: React.FormEvent<HTMLFormElement>) {
+    function saveTask(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        this.props.setTasks((oldTasks) => [
+        setTasks((oldTasks) => [
             ...oldTasks,
             {
-                ...this.state,
+                task,
+                time,
                 selected: false,
                 completed: false,
                 id: uuidv4(),
             }
         ])
 
-        this.setState(this.defaultState)
+        setTask("")
+        setTime("00:00")
     }
 
-    render() {
-        return (
-            <form action="" className={style.novaTarefa} onSubmit={this.saveTask.bind(this)}>
-                <div className={style.inputContainer}>
-                    <div>
-                        <label htmlFor="task">Task: </label>
-                        <input
-                            type="text"
-                            name="task"
-                            id="task"
-                            placeholder="What do you want to do?"
-                            required
-                            value={this.state.task}
-                            onChange={e => this.setState({ ...this.state, task: e.target.value })}
-                        />
-                    </div>
+    return (
+        <form action="" className={style.novaTarefa} onSubmit={ saveTask }>
+            <div className={style.inputContainer}>
+                <div>
+                    <label htmlFor="task">Task: </label>
+                    <input
+                        type="text"
+                        name="task"
+                        id="task"
+                        placeholder="What do you want to do?"
+                        required
+                        value={task}
+                        onChange={e => setTask(e.target.value)}
+                    />
                 </div>
+            </div>
 
-                <div className={style.inputContainer}>
-                    <div>
-                        <label htmlFor="time">Time: </label>
-                        <input
-                            type="time"
-                            step="1"
-                            name="time"
-                            id="time"
-                            min="00:00:00"
-                            max="03:00:00"
-                            required
-                            value={this.state.time}
-                            onChange={e => this.setState({ ...this.state, time: e.target.value })}
-                        />
-                    </div>
+            <div className={style.inputContainer}>
+                <div>
+                    <label htmlFor="time">Time: </label>
+                    <input
+                        type="time"
+                        step="1"
+                        name="time"
+                        id="time"
+                        min="00:00:00"
+                        max="03:00:00"
+                        required
+                        value={time}
+                        onChange={e => setTime(e.target.value)}
+                    />
                 </div>
+            </div>
 
-                <Button text="Adicionar" type="submit" />
-            </form>
-        )
-    }
+            <Button text="Adicionar" type="submit" />
+        </form>
+    )
 }
 
 export default Form;

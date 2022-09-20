@@ -8,12 +8,10 @@ interface Props {
     onClick?: () => void
 }
 
-const Button = (props: Props) => {
-    const { type = "button", onClick } = props
-
+function Button ({ text, type = "button", onClick }: Props) {
     return (
         <button className={style.btn} type={ type } onClick={ onClick }>
-            { props.text }
+            { text }
         </button>
     )
 }
